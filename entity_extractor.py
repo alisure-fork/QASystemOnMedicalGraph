@@ -5,28 +5,30 @@ import ahocorasick
 from sklearn.externals import joblib
 import jieba
 import numpy as np
+import re
+import string
+from gensim.models import KeyedVectors
 
 
 class EntityExtractor:
     def __init__(self):
-        cur_dir = '/'.join(os.path.abspath(__file__).split('/')[:-1])
+        data_dir = "./data"
         # 路径
-        self.vocab_path = os.path.join(cur_dir, 'data/vocab.txt')
-        self.stopwords_path =os.path.join(cur_dir, 'data/stop_words.utf8')
-        self.word2vec_path = os.path.join(cur_dir, 'data/merge_sgns_bigram_char300.txt')
-        # self.same_words_path = os.path.join(cur_dir, 'DATA/同义词林.txt')
+        self.vocab_path = os.path.join(data_dir, 'vocab.txt')
+        self.stopwords_path =os.path.join(data_dir, 'stop_words.utf8')
+        self.word2vec_path = os.path.join(data_dir, 'merge_sgns_bigram_char300.txt')
         self.stopwords = [w.strip() for w in open(self.stopwords_path, 'r', encoding='utf8') if w.strip()]
 
         # 意图分类模型文件
-        self.tfidf_path = os.path.join(cur_dir, 'model/tfidf_model.m')
-        self.nb_path = os.path.join(cur_dir, 'model/intent_reg_model.m')  #朴素贝叶斯模型
+        self.tfidf_path = 'model/tfidf_model.m'
+        self.nb_path =  'model/intent_reg_model.m'  #朴素贝叶斯模型
         self.tfidf_model = joblib.load(self.tfidf_path)
         self.nb_model = joblib.load(self.nb_path)
 
-        self.disease_path = data_dir + 'disease_vocab.txt'
-        self.symptom_path = data_dir + 'symptom_vocab.txt'
-        self.alias_path = data_dir + 'alias_vocab.txt'
-        self.complication_path = data_dir + 'complications_vocab.txt'
+        self.disease_path = os.path.join(data_dir, 'disease_vocab.txt')
+        self.symptom_path = os.path.join(data_dir, 'symptom_vocab.txt')
+        self.alias_path = os.path.join(data_dir, 'alias_vocab.txt')
+        self.complication_path = os.path.join(data_dir, 'complications_vocab.txt')
 
         self.disease_entities = [w.strip() for w in open(self.disease_path, encoding='utf8') if w.strip()]
         self.symptom_entities = [w.strip() for w in open(self.symptom_path, encoding='utf8') if w.strip()]
@@ -117,10 +119,6 @@ class EntityExtractor:
         :param question:
         :return:
         """
-        import re
-        import string
-        from gensim.models import KeyedVectors
-
         jieba.load_userdict(self.vocab_path)
         self.model = KeyedVectors.load_word2vec_format(self.word2vec_path, binary=False)
 

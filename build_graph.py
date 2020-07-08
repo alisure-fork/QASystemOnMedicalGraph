@@ -8,9 +8,9 @@ import os
 
 class MedicalGraph:
     def __init__(self):
-        cur_dir = '/'.join(os.path.abspath(__file__).split('/')[:-1])
-        self.data_path = os.path.join(cur_dir, 'DATA/disease.csv')
+        self.data_path = './data/disease.csv'
         self.graph = Graph("http://localhost:7474", username="neo4j", password="123456789")
+        pass
 
     def read_file(self):
         """

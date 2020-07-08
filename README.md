@@ -1,21 +1,40 @@
 # QASystemOnMedicalGraph
+
 该项目是基于医疗领域知识图谱的问答系统。实现比较简单。
 
 从无到有搭建一个医疗领域知识图谱(知识图谱规模较小)，并基于此知识图谱搭建问答系统实现自动问题解析和回答。
 
 本文参考：[https://github.com/zhihao-chen/QASystemOnMedicalKG](https://github.com/zhihao-chen/QASystemOnMedicalKG)
 
+
 # 项目效果 #
 以下两张图是系统实际运行效果：
 ![系统运行效果图](https://github.com/zhihao-chen/QASystemOnMedicalGraph/blob/master/img/%E6%95%88%E6%9E%9C%E5%9B%BE.png)
 
+
 # 项目运行方式
 运行环境：Python3
+
 数据库：neo4j
+
 预训练词向量：[https://github.com/Embedding/Chinese-Word-Vectors](https://github.com/Embedding/Chinese-Word-Vectors)或https://pan.baidu.com/s/14JP1gD7hcmsWdSpTvA3vKA
+
+
+缺啥装啥：
+
+```
+pip install py2neo
+pip install pyahocorasick
+pip install jieba
+pip install gensim
+```
+
+[OpenSSL](http://slproweb.com/products/Win32OpenSSL.html)
+
 
 1、搭建知识图谱：python build_grapy.py。大概几个小时，耐心等待。
 2、启动问答测试：python kbqa_test.py
+
 
 # 医疗知识图谱
 数据源：39健康网。包括15项信息，其中7类实体，约3.7万实体，21万实体关系。
@@ -63,6 +82,7 @@
 | rate      | 治愈率   | 0.1%               |
 | money     | 费用     | 1000-2000元        |
 
+
 # 问题意图识别
 基于特征词分类的方法来识别用户查询意图
 
@@ -76,6 +96,7 @@
 | query_rate       | 查询治愈率       | 乙肝能治好吗       |
 | query_period     | 查询治愈周期     | 乙肝多久能治好     |
 | disease_describe | 查询疾病所以属性 | 慢性咽炎           |
+
 
 # 总结
 1、本项目构建简单，通过本项目能了解KBQA的工作流程。

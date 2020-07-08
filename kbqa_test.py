@@ -9,6 +9,7 @@ class KBQA:
     def __init__(self):
         self.extractor = EntityExtractor()
         self.searcher = AnswerSearching()
+        pass
 
     def qa_main(self, input_str):
         answer = "对不起，您的问题我不知道，我今后会努力改进的。"
@@ -21,6 +22,7 @@ class KBQA:
             return answer
         else:
             return '\n'.join(final_answer)
+        pass
 
 
 if __name__ == "__main__":
@@ -32,3 +34,5 @@ if __name__ == "__main__":
         answer = handler.qa_main(question)
         print("小豪：", answer)
         print("*"*50)
+        pass
+    pass
